@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { AuthCheck, useAuth } from "reactfire";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Suspense } from "react";
+import Login from "./Login";
+import Home from "./Home";
+import "./App.css";
 
 function App() {
+  const auth = useAuth();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <AuthCheck fallback={<Login />}>
+          <Route exact path="/" component={Home} />
+        </AuthCheck>
+      </Suspense>
+    </Router>
   );
 }
 
