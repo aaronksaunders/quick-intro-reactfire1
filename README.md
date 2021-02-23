@@ -10,11 +10,11 @@ In part one, We set up the firebase project and connected it all to the firebase
 In part two we are querying documents from firestore and setting up the created crud actions using the reactfire firebase hooks
 
 
-ReactFire - https://github.com/FirebaseExtended/reactfire
-ReactFire Overview - https://firebaseopensource.com/projects/firebaseextended/reactfire/
-Firebase Emulator - https://firebase.google.com/docs/rules/emulator-setup
+- ReactFire - https://github.com/FirebaseExtended/reactfire
+- ReactFire Overview - https://firebaseopensource.com/projects/firebaseextended/reactfire/
+- Firebase Emulator - https://firebase.google.com/docs/rules/emulator-setup
 
 
 ### YouTube Videos
-Part One - https://youtu.be/xOVqoVuY-5M
-Part Two - https://youtu.be/FoMbciaDMzY
+- Part One - https://youtu.be/xOVqoVuY-5M
+- Part Two - https://youtu.be/FoMbciaDMzY
