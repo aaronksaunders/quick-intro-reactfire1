@@ -1,10 +1,12 @@
-import { AuthCheck, useAuth } from "reactfire";
 import React from "react";
 import "./App.css";
 
+// redux
+import { useDispatch, useStore } from "react-redux";
+import { login, createUser } from "./features/userAuth/userAuthSlice";
 function Login() {
-  const auth = useAuth();
-
+  const dispatch = useDispatch();
+  const { getState } = useStore();
 
   /**
    *
@@ -16,16 +18,16 @@ function Login() {
 
     try {
       if (_event.nativeEvent.submitter?.name === "createAccount") {
-        await auth.createUserWithEmailAndPassword(email.value,password.value)
+        await dispatch(
+          createUser({ email: email.value, password: password.value })
+        );
         alert("Account Created");
         return;
       }
 
-      const resp = await auth.signInWithEmailAndPassword(
-        email.value,
-        password.value
-      );
-      alert("Logged In: " + resp.user.email);
+      await dispatch(login({ email: email.value, password: password.value }));
+
+      alert("Logged In: " + getState().userAuth.userData?.email);
     } catch (e) {
       alert("ERROR: " + e.message);
     }
@@ -45,7 +47,7 @@ function Login() {
           placeholder="password"
           style={{ display: "block", margin: 12, width: 220 }}
         />
-        <button type="submit"  name="login" style={{ margin: 12 }}>
+        <button type="submit" name="login" style={{ margin: 12 }}>
           LOGIN
         </button>
         <button type="submit" name="createAccount" style={{ margin: 12 }}>

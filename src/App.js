@@ -1,12 +1,17 @@
-import { AuthCheck, useAuth } from "reactfire";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { AuthCheck } from "reactfire";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import React, { Suspense } from "react";
 import Login from "./Login";
 import Home from "./Home";
 import "./App.css";
+import { useDispatch } from "react-redux";
+import { setAuthListener } from "./features/userAuth/userAuthSlice";
 
 function App() {
-  const auth = useAuth();
+  const dispatch = useDispatch();
+
+  (async () => await dispatch(setAuthListener()))();
+
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>

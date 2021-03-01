@@ -1,14 +1,14 @@
-import {
-  AuthCheck,
-  useAuth,
-  useFirestoreCollection,
-  useFirestore,
-} from "reactfire";
-import React, { Suspense } from "react";
+import { useFirestoreCollection, useFirestore } from "reactfire";
+import React from "react";
 import "./App.css";
 
+// redux
+import { useSelector, useDispatch } from "react-redux";
+import { logOut, selectUser } from "./features/userAuth/userAuthSlice";
+
 function Home() {
-  const auth = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const itemsRef = useFirestore().collection("items");
   const { data, status } = useFirestoreCollection(itemsRef);
 
@@ -31,10 +31,14 @@ function Home() {
     }
   };
 
+  const doLogout = async () => {
+    await dispatch(logOut());
+  };
+
   return (
     <div style={{ padding: 20 }}>
-      <h1>{auth.currentUser.email}</h1>
-      <button onClick={async () => await auth.signOut()} style={{ margin: 12 }}>
+      <h1>{user?.email}</h1>
+      <button onClick={async () => await doLogout()} style={{ margin: 12 }}>
         LOGOUT
       </button>
       <div>
@@ -45,7 +49,7 @@ function Home() {
           {status === "loading" ? <div>IS LOADING</div> : null}
           {data?.docs?.map((d) => (
             <p key={d.id}>
-              <button onClick={()=> doDeleteItem(d.id)}>DELETE</button>
+              <button onClick={() => doDeleteItem(d.id)}>DELETE</button>
               <span>&nbsp;&nbsp;&nbsp;</span>
               <span>
                 {d.id} {d.data().name}
