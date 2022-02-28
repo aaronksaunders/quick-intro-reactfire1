@@ -1,3 +1,5 @@
+[SEE UPDATED PROJECT HERE](https://github.com/aaronksaunders/quick-intro-reactfire-v4)
+
 # Quick Intro To ReactJS ReactFire
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
